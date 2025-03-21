@@ -15,7 +15,10 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    environment: "node",
-    includeSource: ["**/*.{js,ts}"],
+    environment: 'node',
+    includeSource: ['**/*.{js,ts}'],
+  },
+  define: {
+    'import.meta.vitest': 'undefined',
   },
 });
