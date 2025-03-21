@@ -12,6 +12,7 @@ export default defineConfig({
     outDir: 'dist',
     emptyOutDir: true,
     sourcemap: true,
+    minify: false,
   },
   test: {
     globals: true,
