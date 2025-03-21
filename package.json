@@ -8,5 +8,8 @@
   "dependencies": {
     "@actions/core": "^1.11.1",
     "@actions/github": "^6.0.0"
+  },
+  "devDependencies": {
+    "vite": "^6.2.2"
   }
 }
