@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "tsc": "tsc",
-    "test": "vitest"
+    "test": "vitest",
+    "build": "vite build"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",
