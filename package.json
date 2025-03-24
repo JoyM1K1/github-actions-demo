@@ -6,7 +6,7 @@
   "scripts": {
     "tsc": "tsc",
     "test": "vitest",
-    "build": "vite build"
+    "build": "esbuild src/index.ts --bundle --outdir=dist --out-extension:.js=.cjs --platform=node --target=node20.0.0 --packages=bundle --define:import.meta.vitest=undefined"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",
@@ -15,8 +15,8 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@types/node": "^22.13.10",
+    "esbuild": "^0.25.1",
     "typescript": "^5.8.2",
-    "vite": "^6.2.2",
     "vitest": "^3.0.9"
   }
 }
