@@ -1,14 +1,29 @@
 import * as core from '@actions/core';
 import * as github from '@actions/github';
 
-function run() {
+async function run() {
   const token = core.getInput('github_token');
   const octokit = github.getOctokit(token);
   const context = github.context;
   console.log('context', context);
-  octokit.rest.meta.get().then(({ data }) => {
-    console.log(data);
+  const commitsRespnose = await octokit.rest.repos.compareCommits({
+    ...context.repo,
+    // biome-ignore lint/complexity/useLiteralKeys: <explanation>
+    base: context.payload['before'],
+    // biome-ignore lint/complexity/useLiteralKeys: <explanation>
+    head: context.payload['after'],
   });
+  console.log('commitsRespnose', commitsRespnose);
+  const releasesResponse = await octokit.rest.repos.listReleases({
+    ...context.repo,
+    per_page: 10,
+  });
+  console.log('releasesResponse', releasesResponse);
+  const tagsResponse = await octokit.rest.repos.listTags({
+    ...context.repo,
+    per_page: 100,
+  });
+  console.log('tagsResponse', tagsResponse);
 }
 
 if (import.meta.vitest) {

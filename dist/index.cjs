@@ -23872,14 +23872,29 @@ var require_github = __commonJS({
 // src/index.ts
 var core = __toESM(require_core(), 1);
 var github = __toESM(require_github(), 1);
-function run() {
+async function run() {
   const token = core.getInput("github_token");
   const octokit = github.getOctokit(token);
   const context2 = github.context;
   console.log("context", context2);
-  octokit.rest.meta.get().then(({ data }) => {
-    console.log(data);
+  const commitsRespnose = await octokit.rest.repos.compareCommits({
+    ...context2.repo,
+    // biome-ignore lint/complexity/useLiteralKeys: <explanation>
+    base: context2.payload["before"],
+    // biome-ignore lint/complexity/useLiteralKeys: <explanation>
+    head: context2.payload["after"]
   });
+  console.log("commitsRespnose", commitsRespnose);
+  const releasesResponse = await octokit.rest.repos.listReleases({
+    ...context2.repo,
+    per_page: 10
+  });
+  console.log("releasesResponse", releasesResponse);
+  const tagsResponse = await octokit.rest.repos.listTags({
+    ...context2.repo,
+    per_page: 100
+  });
+  console.log("tagsResponse", tagsResponse);
 }
 if (void 0) {
   const { describe, it, expect, vi } = void 0;
