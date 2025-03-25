@@ -1,0 +1,9 @@
+name: "Node action demo"
+description: "Node.js で GitHub Action を作成するデモ"
+inputs:
+  github_token:
+    description: "GitHub API にアクセスするためのトークン"
+    required: true
+runs:
+  using: "node20"
+  main: "dist/index.cjs"
