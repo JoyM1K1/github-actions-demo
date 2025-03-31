@@ -6,24 +6,46 @@ async function run() {
   const octokit = github.getOctokit(token);
   const context = github.context;
   console.log('context', context);
-  const commitsRespnose = await octokit.rest.repos.compareCommits({
-    ...context.repo,
-    // biome-ignore lint/complexity/useLiteralKeys: <explanation>
-    base: context.payload['before'],
-    // biome-ignore lint/complexity/useLiteralKeys: <explanation>
-    head: context.payload['after'],
-  });
-  console.log('commitsRespnose', commitsRespnose);
-  const releasesResponse = await octokit.rest.repos.listReleases({
-    ...context.repo,
-    per_page: 10,
-  });
-  console.log('releasesResponse', releasesResponse);
-  const tagsResponse = await octokit.rest.repos.listTags({
-    ...context.repo,
-    per_page: 100,
-  });
-  console.log('tagsResponse', tagsResponse);
+  try {
+    const commitsRespnose = await octokit.rest.repos.compareCommits({
+      ...context.repo,
+      // biome-ignore lint/complexity/useLiteralKeys: <explanation>
+      base: context.payload['before'],
+      // biome-ignore lint/complexity/useLiteralKeys: <explanation>
+      head: context.payload['after'],
+    });
+    console.log('commitsRespnose', commitsRespnose);
+  } catch (error) {
+    console.log('error', error);
+  }
+  try {
+    const commitsRespnose = await octokit.rest.repos.compareCommits({
+      ...context.repo,
+      base: 'a7717097a54dc03d06a91b024457ee4fb221f008',
+      head: context.ref,
+    });
+    console.log('commitsRespnose2', commitsRespnose);
+  } catch (error) {
+    console.log('error', error);
+  }
+  try {
+    const releasesResponse = await octokit.rest.repos.listReleases({
+      ...context.repo,
+      per_page: 10,
+    });
+    console.log('releasesResponse', releasesResponse);
+  } catch (error) {
+    console.log('error', error);
+  }
+  try {
+    const tagsResponse = await octokit.rest.repos.listTags({
+      ...context.repo,
+      per_page: 100,
+    });
+    console.log('tagsResponse', tagsResponse);
+  } catch (error) {
+    console.log('error', error);
+  }
 }
 
 if (import.meta.vitest) {
