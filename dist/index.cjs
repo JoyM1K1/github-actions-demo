@@ -23877,24 +23877,46 @@ async function run() {
   const octokit = github.getOctokit(token);
   const context2 = github.context;
   console.log("context", context2);
-  const commitsRespnose = await octokit.rest.repos.compareCommits({
-    ...context2.repo,
-    // biome-ignore lint/complexity/useLiteralKeys: <explanation>
-    base: context2.payload["before"],
-    // biome-ignore lint/complexity/useLiteralKeys: <explanation>
-    head: context2.payload["after"]
-  });
-  console.log("commitsRespnose", commitsRespnose);
-  const releasesResponse = await octokit.rest.repos.listReleases({
-    ...context2.repo,
-    per_page: 10
-  });
-  console.log("releasesResponse", releasesResponse);
-  const tagsResponse = await octokit.rest.repos.listTags({
-    ...context2.repo,
-    per_page: 100
-  });
-  console.log("tagsResponse", tagsResponse);
+  try {
+    const commitsRespnose = await octokit.rest.repos.compareCommits({
+      ...context2.repo,
+      // biome-ignore lint/complexity/useLiteralKeys: <explanation>
+      base: context2.payload["before"],
+      // biome-ignore lint/complexity/useLiteralKeys: <explanation>
+      head: context2.payload["after"]
+    });
+    console.log("commitsRespnose", commitsRespnose);
+  } catch (error) {
+    console.log("error", error);
+  }
+  try {
+    const commitsRespnose = await octokit.rest.repos.compareCommits({
+      ...context2.repo,
+      base: "a7717097a54dc03d06a91b024457ee4fb221f008",
+      head: context2.ref
+    });
+    console.log("commitsRespnose2", commitsRespnose);
+  } catch (error) {
+    console.log("error", error);
+  }
+  try {
+    const releasesResponse = await octokit.rest.repos.listReleases({
+      ...context2.repo,
+      per_page: 10
+    });
+    console.log("releasesResponse", releasesResponse);
+  } catch (error) {
+    console.log("error", error);
+  }
+  try {
+    const tagsResponse = await octokit.rest.repos.listTags({
+      ...context2.repo,
+      per_page: 100
+    });
+    console.log("tagsResponse", tagsResponse);
+  } catch (error) {
+    console.log("error", error);
+  }
 }
 if (void 0) {
   const { describe, it, expect, vi } = void 0;
