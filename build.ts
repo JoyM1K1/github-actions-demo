@@ -1,6 +1,4 @@
-import Bun from 'bun';
-
-Bun.build({
+await Bun.build({
   entrypoints: ['src/index.ts'],
   outdir: 'dist',
   naming: 'index.cjs',
@@ -10,7 +8,6 @@ Bun.build({
   define: {
     'import.meta.vitest': 'undefined',
   },
-  // external: ['@actions/core', '@actions/github'],
 }).catch((error) => {
   console.error('Build failed:', error);
 });

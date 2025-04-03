@@ -35,8 +35,7 @@
     "noImplicitOverride": true,
     "useUnknownInCatchVariables": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["vitest/importMeta"]
+    "types": ["@types/bun", "vitest/importMeta"]
   },
-  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }
