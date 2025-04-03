@@ -1,0 +1,14 @@
+name: GitHub Actions Demo in PR
+on:
+  pull_request:
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run my action
+        uses: ./ # Uses an action in the root directory
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
