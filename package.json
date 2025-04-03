@@ -1,12 +1,12 @@
 {
   "name": "github-actions-demo",
+  "module": "index.ts",
+  "type": "module",
   "version": "1.0.0",
   "author": "JoyM1K1",
-  "type": "module",
   "scripts": {
     "tsc": "tsc",
-    "test": "vitest",
-    "build": "esbuild src/index.ts --bundle --outdir=dist --out-extension:.js=.cjs --platform=node --target=node20.0.0 --packages=bundle --define:import.meta.vitest=undefined"
+    "test": "vitest"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",
@@ -14,9 +14,10 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@types/node": "^22.13.10",
-    "esbuild": "^0.25.1",
-    "typescript": "^5.8.2",
+    "@types/bun": "^1.2.8",
     "vitest": "^3.0.9"
+  },
+  "peerDependencies": {
+    "typescript": "^5.8.2"
   }
 }
